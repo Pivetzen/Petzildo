@@ -1,0 +1,93 @@
+:root {
+    --bg-color: #f4f4f9;
+    --card-border: #333;
+    --macho: #4a90e2;
+    --femea: #e94e77;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 30px;
+}
+
+/* O CARD ESTILO TRUNFO */
+.card {
+    background: white;
+    border: 6px solid var(--card-border);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: scale(1.03) rotate(1deg);
+}
+
+/* O PIN DE ESPÉCIE */
+.species-pin {
+    position: absolute;
+    top: 15px;
+    left: -5px;
+    padding: 5px 15px;
+    background: #ffcc00;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    border-radius: 0 15px 15px 0;
+    z-index: 5;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    border: 2px solid var(--card-border);
+}
+
+.card-img {
+    width: 100%;
+    height: 200px;
+    background-color: #ddd;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 4px solid var(--card-border);
+}
+
+.content { padding: 15px; }
+
+.name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.gender-m { color: var(--macho); font-weight: bold; font-size: 1.4rem; }
+.gender-f { color: var(--femea); font-weight: bold; font-size: 1.4rem; }
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    font-size: 0.85rem;
+    border-top: 1px dashed #ccc;
+    padding-top: 10px;
+}
+
+.bio {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: #555;
+}
