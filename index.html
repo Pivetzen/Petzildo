@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Petzildo - Coleção</title>
+    
+    <title id="page-title">Petzildo - Coleção</title>
+    <meta name="description" content="Conheça nossos amigos pets no Petzildo!">
+    <meta property="og:title" id="og-title" content="Petzildo">
+    <meta property="og:description" id="og-desc" content="Clique para ver a cartinha deste pet!">
+    <meta property="og:image" id="og-image" content="">
+    <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,10 +23,15 @@
         <p class="loading">Buscando pet...</p>
     </main>
 
-    <div class="navigation">
+    <div class="navigation-container">
+        <div id="pagination" class="pagination-dots">
+            </div>
+    
         <button id="next-btn" onclick="nextPet()">VER PRÓXIMO PET 🐾</button>
+        <button id="random-btn" onclick="randomPet()">VER PET ALEATÓRIO 🎲</button>
+    
         <button id="share-btn" onclick="shareWhatsApp()" class="share-btn">
-        Compartilhar no WhatsApp 💬
+            Compartilhar no WhatsApp 💬
         </button>
     </div>
 
