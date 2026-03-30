@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title id="page-title">Petzildo - Coleção de Pets</title>
-    <meta name="description" content="Conheça nossos amigos peludos no Petzildo!">
+    <title id="page-title">🐾 Petzildo</title>
+    <meta name="description" content="Conheça nossos amigos pets no Petzildo!">
     <meta property="og:title" id="og-title" content="Petzildo">
     <meta property="og:description" id="og-desc" content="Clique para ver a cartinha deste pet!">
     <meta property="og:image" id="og-image" content="">
@@ -32,6 +32,11 @@
     <header style="text-align: center; margin-bottom: 10px;">
         <h1 style="margin: 0; color: #222;">🐾 Petzildo</h1>
     </header>
+    <div style="text-align: center; margin-bottom: 15px;">
+        <label style="font-weight: bold; cursor: pointer; background: #fff; padding: 8px 15px; border-radius: 20px; border: 2px solid #e74c3c; color: #e74c3c;">
+            <input type="checkbox" id="filter-adoption" onchange="loadSinglePet()"> 🏠 Ver apenas para adoção
+        </label>
+    </div>
 
     <main id="pet-display">
         <p class="loading">Buscando pet no Petzildo...</p>
