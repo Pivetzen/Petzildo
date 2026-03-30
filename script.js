@@ -5,7 +5,7 @@ async function loadSinglePet() {
         const response = await fetch(sheetUrl);
         const data = await response.text();
         const rows = data.split(/\r?\n/).filter(r => r.trim() !== "");
-        const header = rows.shift(); // Tira o cabeçalho
+        const header = rows.shift(); 
         
         const totalPets = rows.length;
         const urlParams = new URLSearchParams(window.location.search);
@@ -13,28 +13,35 @@ async function loadSinglePet() {
 
         if (petId >= totalPets || petId < 0) petId = 0;
 
-        // Regex para separar CSV tratando aspas
-        const columns = rows[petId].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+        // Separar colunas tratando aspas e espaços
+        const columns = rows[petId].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/"/g, '').trim());
         
-        // Ajuste de Idade (0 = Filhote)
-        let idadeBruta = columns[3]?.replace(/"/g, '').trim();
-        let idadeTexto = (idadeBruta === "0" || idadeBruta === "" || idadeBruta.toLowerCase() === "0 anos") 
+        /* MAPEAMENTO CONFORME SUA IMAGEM:
+           A(0): Nome | B(1): Apelido | C(2): Tutor | D(3): Idade
+           E(4): Data Nasc | F(5): Raça | G(6): Espécie | H(7): Característica
+           I(8): Sexo | J(9): Foto (URL)
+        */
+
+        let idadeBruta = columns[3];
+        let idadeTexto = (idadeBruta === "0" || idadeBruta === "" || idadeBruta.toLowerCase().includes("filhote")) 
                          ? "👶 Filhote" 
                          : (idadeBruta.toLowerCase().includes("ano") ? idadeBruta : idadeBruta + " anos");
 
         const pet = {
-            nome: columns[0]?.replace(/"/g, ''),
-            apelido: columns[1]?.replace(/"/g, ''),
-            tutor: columns[2]?.replace(/"/g, ''),
+            nome: columns[0],
+            apelido: columns[1],
+            tutor: columns[2],
             idade: idadeTexto,
-            raca: columns[4]?.replace(/"/g, ''),
-            especie: columns[5]?.replace(/"/g, ''),
-            caracteristica: columns[6]?.replace(/"/g, ''),
-            sexo: columns[7]?.replace(/"/g, ''),
-            foto: columns[8]?.replace(/"/g, '')
+            raca: columns[5], 
+            especie: columns[6],
+            caracteristica: columns[7],
+            sexo: columns[8], // Coluna I
+            foto: columns[9]  // Coluna J
         };
 
-        // Atualiza as Meta Tags dinamicamente para o Petzildo
+        // Lógica de Gênero
+        const isMacho = pet.sexo.toLowerCase().startsWith('macho');
+
         document.title = `Petzildo: ${pet.nome}`;
         document.getElementById('og-title').content = `Conheça o ${pet.nome} no Petzildo! 🐾`;
         document.getElementById('og-image').content = pet.foto;
@@ -50,8 +57,8 @@ async function loadSinglePet() {
                 <div class="content">
                     <div class="name-row">
                         <h2>${pet.nome}</h2>
-                        <span class="gender" style="color: ${pet.sexo.trim() === 'Macho' ? '#4a90e2' : '#e94e77'}">
-                            ${pet.sexo.trim() === 'Macho' ? '♂' : '♀'}
+                        <span class="gender" style="color: ${isMacho ? '#4a90e2' : '#e94e77'}">
+                            ${isMacho ? '♂' : '♀'}
                         </span>
                     </div>
                     <p style="margin-top:0"><strong>"${pet.apelido}"</strong></p>
@@ -65,7 +72,6 @@ async function loadSinglePet() {
             </div>
         `;
 
-        // Gerar Passador Numérico do Petzildo
         const pagination = document.getElementById('pagination');
         pagination.innerHTML = '';
         for (let i = 0; i < totalPets; i++) {
@@ -85,20 +91,11 @@ async function loadSinglePet() {
     }
 }
 
-function nextPet() {
-    window.location.href = `?id=${window.nextPetId}`;
-}
-
-function randomPet() {
-    const rand = Math.floor(Math.random() * window.totalCount);
-    window.location.href = `?id=${rand}`;
-}
-
+function nextPet() { window.location.href = `?id=${window.nextPetId}`; }
+function randomPet() { window.location.href = `?id=${Math.floor(Math.random() * window.totalCount)}`; }
 function shareWhatsApp() {
     const petNome = document.querySelector('.name-row h2').innerText;
-    const urlAtual = window.location.href;
-    const msg = encodeURIComponent(`Olha que fofura o ${petNome}! 😍 Veja a cartinha completa no Petzildo: ${urlAtual}`);
-    window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Olha o ' + petNome + ' no Petzildo! 😍 ' + window.location.href)}`, '_blank');
 }
 
 loadSinglePet();
