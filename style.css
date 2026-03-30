@@ -192,3 +192,29 @@ body {
 }
 
 button:active { transform: translateY(3px); box-shadow: none !important; }
+
+/* Botão de Contribuição */
+.contribute-btn {
+    width: 280px;
+    padding: 14px;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    background-color: #3498db; /* Azul para destacar */
+    box-shadow: 0 4px 0px #2980b9;
+    margin-top: 10px;
+    transition: transform 0.1s;
+}
+
+.contribute-btn:hover {
+    background-color: #2980b9;
+}
+
+.contribute-btn:active {
+    transform: translateY(3px);
+    box-shadow: none !important;
+}
