@@ -15,10 +15,10 @@ async function loadSinglePet() {
 
         const columns = rows[petId].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/"/g, '').trim());
         
-        /* MAPEAMENTO ATUALIZADO:
+        /* MAPEAMENTO:
            A(0): Nome | B(1): Apelido | C(2): Tutor | D(3): Idade
            E(4): Data Nasc | F(5): Raça | G(6): Espécie | H(7): Característica
-           I(8): Sexo | J(9): Foto | K(10): Adoção (Sim/Não)
+           I(8): Sexo | J(9): Foto | K(10): Adoção
         */
 
         let idadeBruta = columns[3];
@@ -36,7 +36,7 @@ async function loadSinglePet() {
             caracteristica: columns[7],
             sexo: columns[8],
             foto: columns[9],
-            adote: columns[10] // Nova Coluna K
+            adote: columns[10]
         };
 
         const isMacho = pet.sexo.toLowerCase().startsWith('macho');
@@ -56,7 +56,11 @@ async function loadSinglePet() {
                     <div class="species-pin">${icon} ${pet.especie.toUpperCase()}</div>
                     ${paraAdocao ? '<div class="adoption-tag">🏠 PARA ADOÇÃO!</div>' : ''}
                 </div>
-                <div class="card-img" style="background-image: url('${pet.foto}')"></div>
+                <div class="card-img" 
+                     style="background-image: url('${pet.foto}')" 
+                     onclick="openLightbox('${pet.foto}')"
+                     title="Clique para ver a foto completa">
+                </div>
                 <div class="content">
                     <div class="name-row">
                         <h2>${pet.nome}</h2>
@@ -92,6 +96,18 @@ async function loadSinglePet() {
         console.error("Erro Petzildo:", e);
         document.getElementById('pet-display').innerHTML = "Erro ao carregar dados do Petzildo.";
     }
+}
+
+// FUNÇÕES DA LIGHTBOX
+function openLightbox(url) {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    lbImg.src = url;
+    lb.style.display = 'flex';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
 }
 
 function nextPet() { window.location.href = `?id=${window.nextPetId}`; }
