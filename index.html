@@ -3,19 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Trunfo - Coleção</title>
+    <title>Petzildo - Coleção</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <h1>🐾 Meu Pet Trunfo</h1>
-        <p>Catálogo interativo de amigos peludos</p>
-    </header>
+    <div class="ad-container top-ad">
+        <p>Anúncio</p>
+        </div>
 
-    <main id="pet-container" class="grid-container">
-        <p class="loading">Carregando pets...</p>
+    <main id="pet-display">
+        <p class="loading">Buscando pet...</p>
     </main>
+
+    <div class="navigation">
+        <button id="next-btn" onclick="nextPet()">VER PRÓXIMO PET 🐾</button>
+    </div>
+
+    <div class="ad-container bottom-ad">
+        <p>Anúncio</p>
+        </div>
 
     <script src="script.js"></script>
 </body>
