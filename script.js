@@ -13,13 +13,12 @@ async function loadSinglePet() {
 
         if (petId >= totalPets || petId < 0) petId = 0;
 
-        // Separar colunas tratando aspas e espaços
         const columns = rows[petId].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/"/g, '').trim());
         
-        /* MAPEAMENTO CONFORME SUA IMAGEM:
+        /* MAPEAMENTO ATUALIZADO:
            A(0): Nome | B(1): Apelido | C(2): Tutor | D(3): Idade
            E(4): Data Nasc | F(5): Raça | G(6): Espécie | H(7): Característica
-           I(8): Sexo | J(9): Foto (URL)
+           I(8): Sexo | J(9): Foto | K(10): Adoção (Sim/Não)
         */
 
         let idadeBruta = columns[3];
@@ -35,12 +34,13 @@ async function loadSinglePet() {
             raca: columns[5], 
             especie: columns[6],
             caracteristica: columns[7],
-            sexo: columns[8], // Coluna I
-            foto: columns[9]  // Coluna J
+            sexo: columns[8],
+            foto: columns[9],
+            adote: columns[10] // Nova Coluna K
         };
 
-        // Lógica de Gênero
         const isMacho = pet.sexo.toLowerCase().startsWith('macho');
+        const paraAdocao = pet.adote && pet.adote.toLowerCase() === 'sim';
 
         document.title = `Petzildo: ${pet.nome}`;
         document.getElementById('og-title').content = `Conheça o ${pet.nome} no Petzildo! 🐾`;
@@ -52,7 +52,10 @@ async function loadSinglePet() {
 
         display.innerHTML = `
             <div class="card">
-                <div class="species-pin">${icon} ${pet.especie.toUpperCase()}</div>
+                <div class="tags-container">
+                    <div class="species-pin">${icon} ${pet.especie.toUpperCase()}</div>
+                    ${paraAdocao ? '<div class="adoption-tag">🏠 PARA ADOÇÃO!</div>' : ''}
+                </div>
                 <div class="card-img" style="background-image: url('${pet.foto}')"></div>
                 <div class="content">
                     <div class="name-row">
