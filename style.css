@@ -31,7 +31,6 @@ body {
     font-size: 0.8rem;
 }
 
-/* A CARTA PETZILDO */
 .card {
     background: white;
     width: 300px;
@@ -85,7 +84,6 @@ body {
     padding-top: 10px;
 }
 
-/* NAVEGAÇÃO */
 .navigation-container {
     display: flex;
     flex-direction: column;
@@ -127,7 +125,6 @@ body {
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    transition: transform 0.1s;
     color: white;
     text-align: center;
 }
