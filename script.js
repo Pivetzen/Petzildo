@@ -118,3 +118,30 @@ function shareWhatsApp() {
 }
 
 loadSinglePet();
+
+async function downloadCard() {
+    const card = document.querySelector('.card');
+    const petNome = document.querySelector('.name-row h2').innerText;
+
+    // Criar um container temporário para a marca d'água
+    const watermark = document.createElement('div');
+    watermark.innerText = "www.petzildo.com.br"; // Altere para seu link real
+    watermark.style.cssText = "position:absolute; bottom:5px; right:10px; font-size:10px; color:rgba(0,0,0,0.3); font-weight:bold; z-index:10;";
+    
+    card.appendChild(watermark);
+
+    // Gerar a imagem
+    html2canvas(card, {
+        useCORS: true, // Importante para carregar fotos de links externos (Drive/Imgur)
+        scale: 2,      // Melhora a qualidade da imagem
+        backgroundColor: "#ffffff"
+    }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `Cartinha-${petNome}-Petzildo.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+        
+        // Remove a marca d'água do site após o download para não ficar feio na tela
+        card.removeChild(watermark);
+    });
+}
