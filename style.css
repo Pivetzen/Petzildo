@@ -27,6 +27,9 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background: transparent; 
+    border: none;
+    
 }
 
 /* A CARTA PETZILDO */
