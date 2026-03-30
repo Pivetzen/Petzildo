@@ -7,37 +7,12 @@ async function loadSinglePet() {
         const rows = data.split(/\r?\n/).filter(r => r.trim() !== "");
         const header = rows.shift(); 
         
-async function loadSinglePet() {
-    try {
-        const response = await fetch(sheetUrl);
-        const data = await response.text();
-        let rows = data.split(/\r?\n/).filter(r => r.trim() !== "");
-        const header = rows.shift(); 
-        
-        // --- NOVA LÓGICA DE FILTRO ---
-        const onlyAdoption = document.getElementById('filter-adoption').checked;
-        
-        if (onlyAdoption) {
-            // Filtra as linhas onde a Coluna K (índice 10) é "Sim"
-            rows = rows.filter(row => {
-                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                return cols[10] && cols[10].replace(/"/g, '').trim().toLowerCase() === 'sim';
-            });
-        }
-        // -----------------------------
-
         const totalPets = rows.length;
-        if (totalPets === 0) {
-            document.getElementById('pet-display').innerHTML = "Nenhum pet para adoção no momento. 🐾";
-            document.getElementById('pagination').innerHTML = '';
-            return;
-        }
-
         const urlParams = new URLSearchParams(window.location.search);
         let petId = parseInt(urlParams.get('id')) || 0;
-        if (petId >= totalPets) petId = 0;
 
-        // O restante do código de mapeamento (Nome, Apelido, Foto, etc.) permanece igual
+        if (petId >= totalPets || petId < 0) petId = 0;
+
         const columns = rows[petId].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/"/g, '').trim());
         
         /* MAPEAMENTO:
