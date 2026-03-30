@@ -4,6 +4,7 @@
     --green: #27ae60;
     --orange: #f39c12;
     --whatsapp: #25D366;
+    --adoption-color: #e74c3c; /* Vermelho para destaque */
 }
 
 body {
@@ -31,6 +32,7 @@ body {
     font-size: 0.8rem;
 }
 
+/* A CARTA PETZILDO */
 .card {
     background: white;
     width: 300px;
@@ -41,17 +43,35 @@ body {
     overflow: hidden;
 }
 
-.species-pin {
+.tags-container {
     position: absolute;
     top: 15px;
     left: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+}
+
+.species-pin {
     background: #ffcc00;
     padding: 6px 15px;
     font-weight: bold;
     border-right: 4px solid var(--card-border);
     border-bottom: 4px solid var(--card-border);
-    z-index: 5;
     font-size: 0.75rem;
+    width: fit-content;
+}
+
+.adoption-tag {
+    background: var(--adoption-color);
+    color: white;
+    padding: 4px 12px;
+    font-weight: bold;
+    font-size: 0.7rem;
+    border-right: 4px solid var(--card-border);
+    border-bottom: 4px solid var(--card-border);
+    text-transform: uppercase;
+    width: fit-content;
 }
 
 .card-img {
