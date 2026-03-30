@@ -218,3 +218,23 @@ button:active { transform: translateY(3px); box-shadow: none !important; }
     transform: translateY(3px);
     box-shadow: none !important;
 }
+
+.download-btn {
+    width: 280px;
+    padding: 14px;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    background-color: #9b59b6; /* Roxo para diferenciar */
+    box-shadow: 0 4px 0px #8e44ad;
+    margin-top: 10px;
+}
+
+.download-btn:active {
+    transform: translateY(3px);
+    box-shadow: none !important;
+}
