@@ -114,7 +114,7 @@ function nextPet() { window.location.href = `?id=${window.nextPetId}`; }
 function randomPet() { window.location.href = `?id=${Math.floor(Math.random() * window.totalCount)}`; }
 function shareWhatsApp() {
     const petNome = document.querySelector('.name-row h2').innerText;
-    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Olha o ' + petNome + ' no Petzildo! 😍 ' + window.location.href)}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent('Olha só! ' + petNome + ' está no Petzildo! 😍 ' + window.location.href)}`, '_blank');
 }
 
 loadSinglePet();
